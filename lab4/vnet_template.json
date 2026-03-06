@@ -1,0 +1,41 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vnetName": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Network/virtualNetworks",
+      "apiVersion": "2021-02-01",
+      "name": "[parameters('vnetName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "10.30.0.0/16"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "ManufacturingSystemSubnet",
+            "properties": {
+              "addressPrefix": "10.30.10.0/24"
+            }
+          },
+          {
+            "name": "SensorSubnet",
+            "properties": {
+              "addressPrefix": "10.30.20.0/24"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
